@@ -14,12 +14,12 @@ spec:
     helm:
       releaseName: psmdb-db
       valuesObject:
-        crVersion: "1.20.0"  
+        crVersion: "1.20.0"  # 🎯 Defines the CR version explicitly
         replsets:
           rs0:
-            size: 3
+            size: 3  # 🔹 Defines the number of replica set members
             expose:
-              enabled: true
+              enabled: true  # ✅ Allows external access to the replica set
             resources:
               requests:
                 cpu: "600m"
@@ -31,13 +31,20 @@ spec:
               persistentVolumeClaim:
                 resources:
                   requests:
-                    storage: 20Gi 
+                    storage: 20Gi  # 🛠️ Defines storage allocation
         backup:
-          enabled: false  
+          enabled: false  # ⛔ Disables automated backups for now
         sharding:
-          enabled: false
-        enableVolumeExpansion: true 
+          enabled: false  # ⛔ Disables sharding
+        enableVolumeExpansion: true  # 🔄 Allows expanding PVC size without recreating it
   destination:
     server: https://kubernetes.default.svc
     namespace: clusters
-  syncWave: "1"
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true  # 🚀 Helps ensure proper resource application
+  syncWave: "1"  # 🔄 Ensures the database deploys after the operator

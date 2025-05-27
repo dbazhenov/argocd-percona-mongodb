@@ -15,11 +15,11 @@ spec:
         image:
           repository: percona/percona-server-mongodb-operator
           tag: 1.20.0
-        watchNamespace: clusters 
+        watchNamespace: clusters  # 👀 Specifies which namespace the operator should monitor
         rbac:
-          create: true 
+          create: true  # ✅ Ensures RBAC is properly created
         serviceAccount:
-          create: true
+          create: true  # 🔹 Creates a ServiceAccount for the operator
   destination:
     server: https://kubernetes.default.svc
     namespace: clusters
@@ -29,5 +29,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
-  syncWave: "0"
+      - ServerSideApply=true  # 🚀 Helps avoid issues with large metadata annotations
+  syncWave: "0"  # 🔄 Ensures the operator is deployed first

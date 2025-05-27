@@ -1,14 +1,14 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mongodb-cluster  
+  name: mongodb-cluster
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/dbazhenov/argocd-percona-mongodb.git
     targetRevision: main
-    path: apps
+    path: apps  # 🛠️ Ensures ArgoCD correctly locates this file
   destination:
     server: https://kubernetes.default.svc
     namespace: clusters
@@ -18,4 +18,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-      - ServerSideApply=true
+      - ServerSideApply=true  # ✅ Enables server-side apply to prevent metadata size issues
+  syncWave: "2"  # 🔄 Ensures the cluster deploys after the operator and database
