@@ -14,8 +14,9 @@ spec:
     helm:
       releaseName: psmdb-db
       valuesObject:
+        crVersion: "1.20.0"  
         replsets:
-          rs0:  
+          rs0:
             size: 3
             expose:
               enabled: true
@@ -27,14 +28,16 @@ spec:
                 cpu: "600m"
                 memory: "1G"
             volumeSpec:
-              pvc:
+              persistentVolumeClaim:
                 resources:
                   requests:
-                    storage: 20Gi  
+                    storage: 20Gi 
         backup:
           enabled: false  
         sharding:
           enabled: false
+        enableVolumeExpansion: true 
   destination:
     server: https://kubernetes.default.svc
     namespace: clusters
+  syncWave: "1"
