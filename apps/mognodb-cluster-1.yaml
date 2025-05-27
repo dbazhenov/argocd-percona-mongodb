@@ -33,7 +33,10 @@ spec:
                   requests:
                     storage: 20Gi  # Defines storage allocation
         backup:
-          enabled: false  # Disables automated backups
+          enabled: false
+          volumeMounts: []  
+          storages: {}       
+          tasks: []
         sharding:
           enabled: false  # Disables sharding
         enableVolumeExpansion: true  # Allows expanding PVC size without recreating it
