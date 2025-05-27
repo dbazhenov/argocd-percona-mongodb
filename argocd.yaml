@@ -1,21 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argocd
+  name: gitops-manager  # ✅ Clear name to indicate it manages Git-based deployments
   namespace: argocd
 spec:
   project: default
   source:
     repoURL: https://github.com/dbazhenov/argocd-percona-mongodb.git
     targetRevision: main
-    path: apps
+    path: apps  # ✅ Ensures ArgoCD correctly tracks all apps within the repo
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
   syncPolicy:
     automated:
-      prune: true
-      selfHeal: true
+      prune: true  # ✅ Automatically removes obsolete resources
+      selfHeal: true  # 🔄 Ensures resources remain in their desired state
     syncOptions:
-      - CreateNamespace=true
-      - ServerSideApply=true  # ✅ Keep this for better resource handling
+      - CreateNamespace=true  # 🛠️ Creates namespace if missing
+      - ServerSideApply=true  # 🚀 Optimizes updates to prevent metadata issues

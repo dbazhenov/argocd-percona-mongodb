@@ -47,4 +47,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true  # 🚀 Helps ensure proper resource application
-  syncWave: "1"  # 🔄 Ensures the database deploys after the operator

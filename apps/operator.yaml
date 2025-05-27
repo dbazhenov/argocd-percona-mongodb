@@ -30,4 +30,3 @@ spec:
     syncOptions:
       - CreateNamespace=true
       - ServerSideApply=true  # 🚀 Helps avoid issues with large metadata annotations
-  syncWave: "0"  # 🔄 Ensures the operator is deployed first
