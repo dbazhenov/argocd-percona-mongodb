@@ -15,7 +15,7 @@ spec:
       releaseName: psmdb-db
       valuesObject:
         replsets:
-          - name: rs0
+          rs0:  
             size: 3
             expose:
               enabled: true
@@ -37,4 +37,4 @@ spec:
           enabled: false
   destination:
     server: https://kubernetes.default.svc
-    namespace: clusters 
+    namespace: clusters
